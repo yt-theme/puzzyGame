@@ -45,7 +45,6 @@ class Routers {
         // #############################################################
         //                          任务
         // #############################################################
-        // // 任务提交
         const mission_route = new (require("./routes/mission"))(router)
         // 新增 /yummy/missionadd
         mission_route.mission_add()
@@ -53,6 +52,8 @@ class Routers {
         mission_route.query()
         // 检索最新 /yummy/missionquerylast
         mission_route.query_last()
+        // 提交答案 /yummy/submitanswer
+        mission_route.submit_answer()
 
 
 

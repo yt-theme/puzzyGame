@@ -9,6 +9,10 @@ module.exports = (mongoose) => {
             // 密码加密存储
             set (val) { return bcrypt.hashSync(val, 10) }
         },
+        // 等级
+        level: { type: Number, default: 1 },
+        // 分数
+        score: { type: Number, default: 0 },
         // 用户提交任务口令 每次用户密码登录之后刷新
         var_token: { type: String }
     })
