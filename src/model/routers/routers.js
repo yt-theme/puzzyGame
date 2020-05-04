@@ -44,6 +44,8 @@ class Routers {
         const mission_route = new (require("./routes/mission"))(router)
         // 新增 /yummy/missionadd
         mission_route.mission_add()
+        // 检索 /yummy/missionquery
+        mission_route.query()
         // 检索最新 /yummy/missionquerylast
         mission_route.query_last()
 
