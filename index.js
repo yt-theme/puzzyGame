@@ -28,7 +28,7 @@ class Server {
         this.app.use(bodyParser.urlencoded({ extended: false }))
 
         // 前端目录
-        this.app.use("/index", this.express.static(cfg.FRONTEND_PATH))
+        this.app.use("/frontend", this.express.static(cfg.FRONTEND_PATH))
         // 上传目录
         this.app.use("/" + cfg.UPLOAD, this.express.static(cfg.UPLOAD_PATH))
 

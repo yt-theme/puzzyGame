@@ -1,6 +1,10 @@
 const fs = require("fs")
 const path = require("path")
 
+// 管理员&&密码
+const ADMIN_USERNAME = "admin"
+const ADMIN_PASSWORD = "admin"
+
 // 端口
 const HTTP_PORT = 14488
 
@@ -24,6 +28,8 @@ const UPLOAD_PATH   = path.join(__dirname, "./" + UPLOAD)
 const FRONTEND_PATH = path.join(__dirname, "./" + FRONTEND)
 
 module.exports = {
+    ADMIN_USERNAME,
+    ADMIN_PASSWORD,
     HTTP_PORT,
     MONGODB_URL,
     MONGODB_PORT,

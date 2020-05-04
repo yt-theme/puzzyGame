@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>puzzyGame Management</title>
+</head>
+<body>
+    <div class="container">
+        <!-- 登录区域 -->
+        <div>
+            <label>username<input id="input_username"/></label>
+            <label>password<input id="input_password" type="password"/></label>
+            <button onclick="login()">登录</button>
+        </div>
+        <!-- 工作区域 -->
+        <div>
+            <label>标题<input id="input_title"/></label>
+            <label>正文<textarea id="textarea_article"></textarea></label>
+            <label>答案<textarea id="textarea_answer"></textarea></label>
+            <label>分数<textarea id="textarea_score"></textarea></label>
+            <button onclick="submit()">提交</button>
+        </div>
+    </div>
+    <script src="../utils/utils.js"></script>
+    <script>
+        let admin_token = ""
+        // 登录
+        function login () {
+            let username = document.getElementById("input_username").value
+            let password = document.getElementById("input_password").value
+            ajax("POST", "http://localhost:14488/yummy/adminlogin", { username, password }).then((res) => {
+                console.log("请求成功 =>", res)
+                if (res.data.state != 1) {
+                    alert("登录失败")
+                } else {
+                    admin_token = res.data.admin_token
+                }
+            }).catch((err) => {
+                console.log("请求失败 =>", err)
+            })
+        }
+
+        // 提交
+        function submit () {
+            let title   = document.getElementById("input_title").value
+            let article = document.getElementById("textarea_article").value
+            let answer  = document.getElementById("textarea_answer").value
+            let score   = document.getElementById("textarea_score").value
+
+            ajax("POST", "http://localhost:14488/yummy/missionadd", { title, article, answer, score }, { "Authorization": admin_token }).then((res) => {
+                console.log("请求成功 =>", res)
+            }).catch((err) => {
+                console.log("请求失败 =>", err)
+            })
+        }
+    </script>
+</body>
+</html>

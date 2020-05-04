@@ -1,14 +1,24 @@
-const { Mongo_model_mission }   = require("../../../db/mongodb/mongodb")
+const fs = require("fs")
+const { Mongo_model_mission, Mongo_model_admin }   = require("../../../db/mongodb/mongodb")
+const middleware_admin          = require("../../middleware/admin")
+const cfg                       = require("../../../../config")
+
 
 class Mission {
     constructor (router) {
         this.router = router
     }
 
-    // 新增
+    // 新增 需要管理员权限
     mission_add () {
-        this.router.post("/yummy/missionadd", function (req, res) {
+        const admin_token = fs.readFileSync(cfg.KEY_PATH + "/admin_token", "UTF-8")
+        this.router.post("/yummy/missionadd", (req, res, next) => { middleware_admin(req, res, next, Mongo_model_admin, admin_token) }, function (req, res) {
             console.log("新增任务 =>", req.body)
+
+            if (req.analyz_state != 1) {
+                res.json({ "state": 0, "msg": "鉴权失败" })
+                return false
+            }
 
             // 数据对错
             let okReq_flag = true
@@ -17,7 +27,7 @@ class Mission {
             if (!req.body.article)  okReq_flag = false
             if (!req.body.answer)   okReq_flag = false
             if (!req.body.score)    okReq_flag = false
-            if (!req.body.files)    okReq_flag = false
+            // if (!req.body.files)    okReq_flag = false
 
             if (!okReq_flag) {
                 res.json({ "state": 0, "msg": "信息不完整" })
