@@ -90,6 +90,9 @@ class Account {
                         res.json({ "state": 0, "msg": "更新数据库失败" })
                     })
 
+                } else {
+                    res.json({ "state": 0, "msg": "用户名或密码错误" })
+                    return false
                 }
 
             }).catch((err) => {

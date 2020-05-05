@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>puzzyGame</title>
+    <link rel="stylesheet" href="css/public.css" type="text/css">
+    <link rel="stylesheet" href="css/index.css"  type="text/css">
+</head>
+<body>
+    <!-- 主体 -->
+    <div class="container just_cent align_cent w_100vw h_100vh">
+        <div class="container_inner h_100">
+            <!-- 上一篇 -->
+            <div class="last_article" id="last_article">
+                <a class="last_article_link" href="javascript:void(0)" onclick="query_last()">上一篇</a>
+            </div>
+            <!-- 文章区域 -->
+            <div class="article_content" id="article_content"></div>
+        </div>
+    </div>
+
+    <!-- 周围 -->
+    <div class="around">
+        <!-- 注册 -->
+        <div class="register_btn normal_btn" id="register_btn" onclick="show_login_pop('register')">注册</div>
+        <!-- 登录按钮 -->
+        <div class="login_btn normal_btn" id="login_btn" onclick="show_login_pop()">登录</div>
+        <!-- 注销按钮 -->
+        <div class="logout_btn normal_btn" id="logout_btn" onclick="do_logout()">注销</div>
+    </div>
+
+    <!-- 登录 -->
+    <div class="login_pop just_cent align_cent w_100vw h_100vh" id="login_pop">
+        <div class="login_inner">
+            <ul class="login_inner_ul">
+                <li class="login_inner_li">
+                    <h2 class="login_inner_title" id="login_inner_title">登录</h2>
+                </li>
+                <li class="login_inner_li">
+                    <label>
+                        <span class="padd_r_05em">帐号</span>
+                        <input class="form_input login_inner_username" id="login_inner_username" placeholder="字母数字中文"/>
+                    </label>
+                </li>
+                <li class="login_inner_li">
+                    <label>
+                        <span class="padd_r_05em">密码</span>
+                        <input class="form_input login_inner_password" id="login_inner_password" maxlength="13" placeholder="最大13位" type="password"/>
+                    </label>
+                </li>
+                <li class="login_inner_li just_arou align_cent">
+                    <div class="login_inner_btn gray_btn" onclick="close_login_pop()">关闭</div>
+                    <div class="login_inner_btn normal_btn" id="login_submit" onclick="login()">登录</div>
+                    <div class="login_inner_btn normal_btn" id="register_submit" onclick="register()">注册</div>
+                </li>
+            </ul>
+        </div>
+    </div>
+
+    <script src="../utils/utils.js"></script>
+    <script src="js/index.js"></script>
+</body>
+</html>

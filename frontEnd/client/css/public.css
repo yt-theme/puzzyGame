@@ -1,0 +1,81 @@
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+    font-size: 16px;
+}
+ul { list-style: none; }
+
+body {
+    --main-bgc: #2B2D32;
+    --lower-bgc: #606167;
+    --normal-btn-bgc: #D056B3;
+    --normal-btn-color: #f9f9f9;
+    --gray-btn-bgc: #e9e6e7;
+    --gray-btn-color: #4a4a4a;
+    --box-shadow-color: #333;
+    --pop-bgc: #33333377;
+    --login-inner-bgc: #efefef;
+    --normal-color: #4a4a4a;
+    --form-input-bgc: #e9e9e9;
+    --form-input-bgc-active: #efefef;
+    --form-input-border-color: #c1c1c1;
+    --article-color: #d2d2d2;
+    --last-article-link-color: #fefef1;
+    --split-line-color: #c6c5c3;
+    --answer-input-border-color: #d3d2d1;
+    --answer-input-bgc: #efefe1;
+}
+
+.flex { display: flex; }
+.just_betw { display: flex; justify-content: space-between; }
+.just_arou { display: flex; justify-content: space-around; }
+.just_cent { display: flex; justify-content: center; }
+.align_cent { display: flex; align-items: center; }
+.w_100 { width: 100%; }
+.w_100vw { width: 100vw; }
+.h_100 { height: 100%; }
+.h_100vh { height: 100vh; }
+.margin_r_11px { margin-right: 11px; }
+.padd_r_05em { padding-right: 0.5em; }
+
+.normal_btn, .gray_btn, .answer_btn {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 18px;
+    border-radius: 5px;
+    box-shadow: 0 0 2px var(--box-shadow-color);
+    padding: 5px 15px;
+    cursor: pointer;
+}
+.normal_btn {
+    background-color: var(--normal-btn-bgc);
+    color: var(--normal-btn-color);
+}
+.gray_btn {
+    background-color: var(--gray-btn-bgc);
+    color: var(--gray-btn-color);
+}
+
+.form_input {
+    background-color: var(--form-input-bgc);
+    border: 1px solid var(--form-input-border-color);
+    border-radius: 3px;
+    padding: 10px 5px;
+}
+.form_input:focus {
+    background-color: var(--form-input-bgc-active);
+}
+
+.answer_btn {
+    background-color: var(--gray-btn-bgc);
+    color: var(--gray-btn-color);
+}
+
+.answer_input {
+    border: 1px solid var(--answer-input-border-color);
+    border-radius: 5px;
+    background-color: var(--answer-input-bgc);
+    padding: 5px;
+}
