@@ -27,6 +27,12 @@ const UPLOAD_PATH   = path.join(__dirname, "./" + UPLOAD)
 // 前端文件目录
 const FRONTEND_PATH = path.join(__dirname, "./" + FRONTEND)
 
+// ###############################################
+//                  其它信息
+// ###############################################
+// 一天的结束
+const DAY_END_T = { "h": 23, "m": 59, "s": 59 }
+
 module.exports = {
     ADMIN_USERNAME,
     ADMIN_PASSWORD,
@@ -38,5 +44,6 @@ module.exports = {
     FRONTEND,
     KEY_PATH,
     UPLOAD_PATH,
-    FRONTEND_PATH
+    FRONTEND_PATH,
+    DAY_END_T
 }

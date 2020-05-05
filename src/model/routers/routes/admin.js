@@ -43,13 +43,9 @@ class Account {
 
                     // admin_token存入数据库
                     Mongo_model_admin.updateOne({ "_id": v._id }, { $set: { "operate_token": token } }).then((v1) => {
-
                         res.json({ "state": 1, "msg": "ok", "admin_token": token })
-
                     }).catch((err1) => {
-
                         res.json({ "state": 0, "msg": "更新数据库失败" })
-
                     })
 
                 } else {

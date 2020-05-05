@@ -85,13 +85,9 @@ class Account {
 
                     // var_token存入数据库
                     Mongo_model_account.updateOne({ "_id": v._id }, { $set: { "var_token": token } }).then((v1) => {
-
                         res.json({ "state": 1, "msg": "ok", "var_token": token })
-
                     }).catch((err1) => {
-
                         res.json({ "state": 0, "msg": "更新数据库失败" })
-
                     })
 
                 }

@@ -139,6 +139,49 @@ class Mission {
                 return false
             }
 
+            /* #################################################################################################
+
+                            判断当天是否已提交过 0点之后算第二天 即距下一个0点剩余24小时以内则算当天
+
+            ################################################################################################# */
+            // const last_submit = new Date(req.analyz_profile.last_submit)
+            const curr_time   = new Date()
+            const day_end     = cfg.DAY_END_T || { "h": 23, "m": 59, "s": 59 }
+
+            // const last_t = { 
+            //     "Y": last_submit.getFullYear(), 
+            //     "M": last_submit.getMonth()+1, 
+            //     "D": last_submit.getDate(), 
+            //     "h": last_submit.getHours(), 
+            //     "m": last_submit.getMinutes(), 
+            //     "s": last_submit.getSeconds()
+            // }
+            const curr_t = { 
+                "Y": curr_time.getFullYear(), 
+                "M": curr_time.getMonth()+1, 
+                "D": curr_time.getDate(), 
+                "h": curr_time.getHours(), 
+                "m": curr_time.getMinutes(), 
+                "s": curr_time.getSeconds()
+            }
+
+            // 判断当前提交过的条件是 1提交时间在前一天的23:59:59之后
+            // 当前的23:59:59的时间戳
+            const cur_day_end_t = new Date(`${curr_t.Y}-${curr_t.M}-${curr_t.D} ${day_end.h}:${day_end.m}:${day_end.s}`).getTime()
+            // 当前的前一天 也就是减去60*60*24*1000
+            const last_day_end_t = cur_day_end_t - 86400000
+            // 如果提交时间大于等于last_day_end_t证明已提交过 否则未提交
+            /*
+                -#####      #
+                -        # 
+                -   #
+            */
+           // 如果已提交过
+           console.log("提交时间对比 =>", req.analyz_profile.last_submit, last_day_end_t)
+           if (req.analyz_profile.last_submit >= last_day_end_t) {
+                res.json({ "state": 0, "msg": "今日已提交任务" })
+                return false
+           }
 
 
             // 用户得分&&等级
@@ -150,7 +193,7 @@ class Mission {
                 }
 
                 // 更新用户数据
-                Mongo_model_account.updateOne({ "_id": req.analyz_profile._id }, { $set: { "score": result.score, "level": result.level } }).then((v) => {
+                Mongo_model_account.updateOne({ "_id": req.analyz_profile._id }, { $set: { "score": result.score, "level": result.level, "last_submit": curr_time } }).then((v) => {
                     console.log("用户提交任务返回 =>", v)
                     Mongo_model_account.findOne({ "_id": req.analyz_profile._id }).then((v1) => {
                         res.json({ "state": 1, "msg": "提交任务成功", "data": v1 })
