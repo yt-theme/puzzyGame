@@ -82,7 +82,7 @@ function login () {
         }
     }).catch((err) => {
         console.log("请求失败 =>", err)
-        alert(err || "注册失败")
+        alert(err || "登录失败")
     })
 }
 
@@ -107,7 +107,7 @@ function check_login () {
         }
     }).catch((err) => {
         console.log("请求失败 =>", err)
-        alert(err || "注册失败")
+        alert(err || "检查登录失败")
     })
 }
 
@@ -126,7 +126,7 @@ function query_today_data () {
         }
     }).catch((err) => {
         console.log("请求失败 =>", err)
-        alert(err || "注册失败")
+        alert(err || "查询失败")
     })
 }
 
@@ -184,7 +184,7 @@ function query_last () {
         }
     }).catch((err) => {
         console.log("请求失败 =>", err)
-        alert(err || "注册失败")
+        alert(err || "查询失败")
     })
 }
 
@@ -192,7 +192,7 @@ function query_last () {
 function submit_answer (_id) {
     const var_token   = localStorage.getItem("var_token")
     if (!var_token) {
-        show_login_pop()
+        show_login_pop("login")
         return false
     }
     // 当前输入框
@@ -209,13 +209,13 @@ function submit_answer (_id) {
             alert(res.data.msg)
         } else {
             if (res.data.msg == "鉴权失败") {
-                show_login_pop()
+                show_login_pop("login")
             } else {
                 alert(res.data.msg)
             }
         }
     }).catch((err) => {
         console.log("请求失败 =>", err)
-        alert(err || "注册失败")
+        alert(err || "提交失败")
     })
 }
