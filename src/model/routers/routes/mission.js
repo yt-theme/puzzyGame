@@ -151,6 +151,7 @@ class Mission {
                 }
             } else {
                 res.json({ "state": 0, "msg": "检索最新任务失败" })
+                return false
             }
 
 
