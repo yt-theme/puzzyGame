@@ -138,14 +138,18 @@ function render_article_data (arr, mode) {
         tmp_html = `
             <h2 class="article_content_title">${ite.title}</h2>
             <p class="article_content_time">${
-                update_t.getFullYear() + "-" +
-                update_t.getMonth() + 1 + "-" +
-                update_t.getDate() + 1 + " " +
+                update_t.getFullYear() + "年" +
+                (update_t.getMonth() + 1) + "月" +
+                (update_t.getDate() + 1) + "日 " +
                 update_t.getHours() + ":" +
                 update_t.getMinutes() + ":" +
                 update_t.getSeconds()
             }</p>
-            <div class="article_content_article">${ite.article}</div>
+            <div class="article_content_article" readonly>${
+                ite.article.replace(/\n/g, "<br/>")
+                           .replace(/\r/g, "<br/>")
+                           .replace(/ /g, "&nbsp")
+            }</div>
             <!-- 提交答案区域 -->
             <div class="submit_answer align_cent">
                 <label class="margin_r_11px">答案</label>

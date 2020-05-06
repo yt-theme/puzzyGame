@@ -70,14 +70,22 @@
     text-align: center;
     font-size: 26px;
     line-height: 3;
+    margin-top: 29px;
 }
 .article_content_time {
     text-align: center;
     padding-bottom: 1em;
 }
 .article_content_article {
-    line-height: 1.9;
+    display: block;
+    width: 100%;
+    /* height: 50vh; */
+    line-height: 2.1;
     letter-spacing: 1px;
+    background-color: #00000000;
+    color: var(--article-color);
+    border: 0;
+    resize:none;
 }
 
 .last_article {
@@ -91,5 +99,6 @@
     width: 100%;
     margin-top: 1em;
     border-top: 2px dashed var(--split-line-color);
+    border-bottom: 2px dashed var(--split-line-color);
     padding: 1em 0;
 }
