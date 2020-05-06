@@ -24,7 +24,7 @@ body {
     --last-article-link-color: #fefef1;
     --split-line-color: #c6c5c3;
     --answer-input-border-color: #d3d2d1;
-    --answer-input-bgc: #efefe1;
+    --answer-input-bgc: #e9e6e7;
     --scroll-bar-color: #616161;
     --scroll-bar-bgc: #e3e3e3;
 }
@@ -46,7 +46,7 @@ body {
     justify-content: center;
     align-items: center;
     font-size: 18px;
-    border-radius: 5px;
+    border-radius: 3px;
     box-shadow: 0 0 2px var(--box-shadow-color);
     padding: 5px 15px;
     cursor: pointer;
@@ -77,7 +77,7 @@ body {
 
 .answer_input {
     border: 1px solid var(--answer-input-border-color);
-    border-radius: 5px;
+    border-radius: 3px;
     background-color: var(--answer-input-bgc);
-    padding: 5px;
+    padding: 7px;
 }
