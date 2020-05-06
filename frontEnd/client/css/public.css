@@ -25,6 +25,8 @@ body {
     --split-line-color: #c6c5c3;
     --answer-input-border-color: #d3d2d1;
     --answer-input-bgc: #efefe1;
+    --scroll-bar-color: #616161;
+    --scroll-bar-bgc: #e3e3e3;
 }
 
 .flex { display: flex; }
