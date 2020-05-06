@@ -149,8 +149,8 @@ function render_article_data (arr, mode) {
             <!-- 提交答案区域 -->
             <div class="submit_answer align_cent">
                 <label class="margin_r_11px">答案</label>
-                <input class="answer_input margin_r_11px"/>
-                <div class="answer_btn margin_r_11px">提交</div>
+                <input class="answer_input margin_r_11px" id="answerinput_${ite._id}"/>
+                <div class="answer_btn margin_r_11px" onclick="submit_answer('${ite._id}')">提交</div>
             </div>
         `
     })
@@ -177,6 +177,38 @@ function query_last () {
             CURRENT_page += 1
         } else {
             alert(res.data.msg)
+        }
+    }).catch((err) => {
+        console.log("请求失败 =>", err)
+        alert(err || "注册失败")
+    })
+}
+
+// 提交答案
+function submit_answer (_id) {
+    const var_token   = localStorage.getItem("var_token")
+    if (!var_token) {
+        show_login_pop()
+        return false
+    }
+    // 当前输入框
+    let input_val = document.getElementById("answerinput_" + _id).value
+    if (!input_val) {
+        alert("输入内容")
+        return false
+    }
+    const answer      = input_val
+    const mission_id  = _id
+    ajax("POST", "/yummy/submitanswer", { answer, mission_id }, { "Authorization": var_token }).then((res) => {
+        console.log("请求成功 =>", res)
+        if (res.data.state == 1) {
+            alert(res.data.msg)
+        } else {
+            if (res.data.msg == "鉴权失败") {
+                show_login_pop()
+            } else {
+                alert(res.data.msg)
+            }
         }
     }).catch((err) => {
         console.log("请求失败 =>", err)

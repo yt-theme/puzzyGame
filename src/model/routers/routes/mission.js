@@ -188,7 +188,7 @@ class Mission {
             __this__._analysis_answer(req.body.answer, req.body.mission_id, req.analyz_profile.score, (result) => {
 
                 if (!result) {
-                    res.json({ "state": 0, "msg": "解析答案失败" })
+                    res.json({ "state": 0, "msg": "答案错误" })
                     return false
                 }
 
