@@ -58,13 +58,6 @@
     width: 40%;
 }
 
-/* @-moz-document url-prefix(http://),url-prefix(https://) {   
-scrollbar {   
-    -moz-appearance: none !important;   
-    background: rgb(0,255,0) !important;   
-}
-} */
-
 .container_inner {
     overflow: auto;
 }
@@ -123,4 +116,13 @@ scrollbar {
     border-top: 2px dashed var(--split-line-color);
     border-bottom: 2px dashed var(--split-line-color);
     padding: 1em 0;
+}
+
+.user_score_area {
+    position: fixed;
+    top: 50vh;
+    left: 15px;
+    background-color: var(--main-bgc);
+    border-radius: 3px;
+    padding: 0.5em;
 }

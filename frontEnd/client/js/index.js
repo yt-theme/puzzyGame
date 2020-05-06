@@ -146,7 +146,8 @@ function render_article_data (arr, mode) {
                 update_t.getSeconds()
             }</p>
             <div class="article_content_article" readonly>${
-                ite.article.replace(/\n/g, "<br/>")
+                ite.article.replace(/\r\n/g, "<br/>")
+                           .replace(/\n/g, "<br/>")
                            .replace(/\r/g, "<br/>")
                            .replace(/ /g, "&nbsp")
             }</div>
@@ -177,6 +178,10 @@ function query_last () {
     ajax("POST", "/yummy/missionquery", { page, size }).then((res) => {
         console.log("请求成功 =>", res)
         if (res.data.state == 1) {
+            if (res.data.data.length == 0) {
+                alert("已是最前一页")
+                return false
+            }
             render_article_data(res.data.data, "preappend")
             CURRENT_page += 1
         } else {

@@ -120,7 +120,7 @@ class Mission {
     // 提交答案 需要验证用户token
     submit_answer () {
         const __this__ = this
-        this.router.post("/yummy/submitanswer", (req, res, next) => { middleware_account(req, res, next, Mongo_model_account, this.var_token) }, function (req, res) {
+        this.router.post("/yummy/submitanswer", (req, res, next) => { middleware_account(req, res, next, Mongo_model_account, this.var_token) }, async function (req, res) {
             console.log("提交答案 =>", req.body)
 
             if (req.analyz_state != 1) {
@@ -138,6 +138,21 @@ class Mission {
                 res.json({ "state": 0, "msg": "需要答案和任务id" })
                 return false
             }
+
+            /* #################################################################################################
+                                                        只能提交最新任务
+            ################################################################################################# */ 
+            // 1.检索最新的任务的_id
+            let last_id_arr = await  Mongo_model_mission.find({}, null, { "sort": { "_id": -1 }, "limit": 1 })
+            if (last_id_arr) {
+                if (last_id_arr[0]._id != req.body.mission_id) {
+                    res.json({ "state": 0, "msg": "不能提交以往任务" })
+                    return false
+                }
+            } else {
+                res.json({ "state": 0, "msg": "检索最新任务失败" })
+            }
+
 
             /* #################################################################################################
 
@@ -176,12 +191,12 @@ class Mission {
                 -        # 
                 -   #
             */
-           // 如果已提交过
-           console.log("提交时间对比 =>", req.analyz_profile.last_submit, last_day_end_t)
-           if (req.analyz_profile.last_submit >= last_day_end_t) {
-                res.json({ "state": 0, "msg": "今日已提交任务" })
-                return false
-           }
+            // 如果已提交过
+            console.log("提交时间对比 =>", req.analyz_profile.last_submit, last_day_end_t)
+            if (req.analyz_profile.last_submit >= last_day_end_t) {
+                    res.json({ "state": 0, "msg": "今日已提交过任务, 等下一期吧" })
+                    return false
+            }
 
 
             // 用户得分&&等级
