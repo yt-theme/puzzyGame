@@ -122,7 +122,8 @@
     position: fixed;
     top: 5px;
     left: 5px;
-    background-color: var(--main-bgc);
+    /* background-color: var(--main-bgc); */
+    text-shadow: 0 0 5px var(--main-bgc);
     border-radius: 3px;
     padding: 0.5em;
 }
