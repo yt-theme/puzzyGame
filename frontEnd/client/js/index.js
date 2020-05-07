@@ -79,7 +79,7 @@ function login () {
             close_login_pop()
             dealt_logined_UI()
             query_today_data()
-
+            get_userinfo()
         } else {
             alert(res.data.msg)
         }
