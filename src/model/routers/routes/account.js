@@ -107,7 +107,17 @@ class Account {
 
             if (req.analyz_state != 1) return false
 
-            res.json({ "state": 1, "msg": req.analyz_profile })
+            res.json({ "state": 1, "msg": "ok", "data": req.analyz_profile })
+        })
+    }
+
+    // 获取用户信息
+    userinfo () {
+        this.router.post("/yummy/userinfo", (req, res, next) => { middleware_account(req, res, next, Mongo_model_account, this.var_token) }, function (req, res) {
+
+            if (req.analyz_state != 1) return false
+
+            res.json({ "state": 1, "msg": "ok", "data": req.analyz_profile })
         })
     }
 }

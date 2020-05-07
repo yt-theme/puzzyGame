@@ -39,6 +39,8 @@ class Routers {
         account_route.login()
         // 检查登录 /yummy/checklogin
         account_route.checklogin()
+        // 获取用户信息 /yummy/userinfo
+        account_route.userinfo()
 
 
 

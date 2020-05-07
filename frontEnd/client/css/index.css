@@ -72,7 +72,7 @@
 .container_inner::-webkit-scrollbar-thumb{
     /*width: 10px;*/
     height: 20px;
-    border-radius: 10px;
+    border-radius: 3px;
     background-color: var(--scroll-bar-bgc);
 }
 .article_content {
@@ -121,8 +121,12 @@
 .user_score_area {
     position: fixed;
     top: 50vh;
-    left: 15px;
+    left: 5px;
     background-color: var(--main-bgc);
     border-radius: 3px;
     padding: 0.5em;
+}
+.user_score_area_li {
+    color: var(--article-color);
+    padding: 5px 0;
 }

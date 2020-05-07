@@ -8,6 +8,8 @@ let login_inner_title       = document.getElementById("login_inner_title")
 let login_inner_username    = document.getElementById("login_inner_username")
 let login_inner_password    = document.getElementById("login_inner_password")
 let article_content         = document.getElementById("article_content")
+let user_sum_score          = document.getElementById("user_sum_score")
+let user_sum_level          = document.getElementById("user_sum_level")
 
 let CURRENT_page = 1
 
@@ -102,6 +104,7 @@ function check_login () {
         if (res.data.state == 1) {
             dealt_logined_UI()
             query_today_data()
+            set_user_info(res.data.data)
         } else {
             alert(res.data.msg)
         }
@@ -110,6 +113,29 @@ function check_login () {
         alert(err || "检查登录失败")
     })
 }
+
+// 获取用户信息
+function get_userinfo () {
+    const var_token = localStorage.getItem("var_token")
+    ajax("POST", "/yummy/userinfo", {}, { "Authorization": var_token }).then((res) => {
+        console.log("请求成功 =>", res)
+        if (res.data.state == 1) {
+            set_user_info(res.data.data)
+        } else {
+            alert(res.data.msg)
+        }
+    }).catch((err) => {
+        console.log("请求失败 =>", err)
+        alert(err || "获取用户信息失败")
+    })
+}
+
+// 设置用户基本信息到网页
+function set_user_info(obj) {
+    user_sum_score.innerHTML = obj.score
+    user_sum_level.innerHTML = obj.level || "未开通等级"
+}
+
 
 
 // #################################################################
@@ -212,6 +238,8 @@ function submit_answer (_id) {
         console.log("请求成功 =>", res)
         if (res.data.state == 1) {
             alert(res.data.msg)
+            // 更新分数
+            get_userinfo()
         } else {
             if (res.data.msg == "鉴权失败") {
                 show_login_pop("login")
