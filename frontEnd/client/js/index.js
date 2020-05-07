@@ -58,6 +58,7 @@ function register () {
         if (res.data.state == 1) {
             alert("注册成功,返回登录!")
             close_login_pop()
+            show_login_pop("login")
         } else {
             alert(res.data.msg)
         }
@@ -132,7 +133,7 @@ function get_userinfo () {
 
 // 设置用户基本信息到网页
 function set_user_info(obj) {
-    user_sum_score.innerHTML = obj.score
+    user_sum_score.innerHTML = obj.score || 0
     user_sum_level.innerHTML = obj.level || "未开通等级"
 }
 
@@ -143,10 +144,11 @@ function set_user_info(obj) {
 // #################################################################
 // 请求今日数据
 function query_today_data () {
-    ajax("POST", "/yummy/missionquerylast", {}).then((res) => {
+    const var_token = localStorage.getItem("var_token") || ""
+    ajax("POST", "/yummy/missionquerylast", {}, { "Authorization": var_token }).then((res) => {
         console.log("请求成功 =>", res)
         if (res.data.state == 1) {
-            render_article_data(res.data.data)
+            render_article_data(res.data.data, "normal", res.data.record)
         } else {
             alert(res.data.msg)
         }
@@ -157,19 +159,15 @@ function query_today_data () {
 }
 
 // 渲染文章数据
-function render_article_data (arr, mode) {
+function render_article_data (arr, mode, record) {
     let tmp_html = ''
     arr.forEach((ite, ind) => {
-        let update_t = new Date(ite.time)
+
+        // 文章主体区域
         tmp_html = `
             <h2 class="article_content_title">${ite.title}</h2>
             <p class="article_content_time">${
-                update_t.getFullYear() + "年" +
-                (update_t.getMonth() + 1) + "月" +
-                (update_t.getDate() + 1) + "日 " +
-                update_t.getHours() + ":" +
-                update_t.getMinutes() + ":" +
-                update_t.getSeconds()
+                timestamp_to_datetime(ite.time)
             }</p>
             <div class="article_content_article" readonly>${
                 ite.article.replace(/\r\n/g, "<br/>")
@@ -178,11 +176,22 @@ function render_article_data (arr, mode) {
                            .replace(/ /g, "&nbsp")
             }</div>
             <!-- 提交答案区域 -->
-            <div class="submit_answer align_cent">
-                <label class="margin_r_11px">答案</label>
-                <input class="answer_input margin_r_11px" id="answerinput_${ite._id}"/>
-                <div class="answer_btn margin_r_11px" onclick="submit_answer('${ite._id}')">提交</div>
-            </div>
+            ${
+                record
+                ? `
+                    <div class="submit_answer align_cent">
+                        <label class="margin_r_11px">分数 <span>${record.score || 0}</span></label>
+                        <label class="margin_r_11px">提交时间 <small>${timestamp_to_datetime(record.submit_time)}</small></label>
+                    </div>
+                ` : `
+                    <div class="submit_answer align_cent">
+                        <label class="margin_r_11px">答案</label>
+                        <input class="answer_input margin_r_11px" id="answerinput_${ite._id}"/>
+                        <div class="answer_btn margin_r_11px" onclick="submit_answer('${ite._id}')">提交</div>
+                    </div>
+                `
+            }
+            
         `
     })
     // 向后追加
@@ -201,7 +210,8 @@ function render_article_data (arr, mode) {
 function query_last () {
     let page = CURRENT_page + 1
     let size = 1
-    ajax("POST", "/yummy/missionquery", { page, size }).then((res) => {
+    const var_token = localStorage.getItem("var_token") || ""
+    ajax("POST", "/yummy/missionquery", { page, size }, { "Authorization": var_token }).then((res) => {
         console.log("请求成功 =>", res)
         if (res.data.state == 1) {
             if (res.data.data.length == 0) {
@@ -240,6 +250,8 @@ function submit_answer (_id) {
             alert(res.data.msg)
             // 更新分数
             get_userinfo()
+            // 重新检索
+            query_today_data()
         } else {
             if (res.data.msg == "鉴权失败") {
                 show_login_pop("login")

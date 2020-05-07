@@ -7,7 +7,9 @@ module.exports = (req, res, next, mongo_model_account, TOKEN) => {
     console.log("中间件 account =>", req_auth)
 
     if (!req_auth) {
-        res.json({ "state": 0, "msg": "鉴权失败" })
+        req.analyz_state    = 0
+        req.analyz_profile  = null
+        next()
         return false
     }
 
@@ -19,7 +21,9 @@ module.exports = (req, res, next, mongo_model_account, TOKEN) => {
         token_real = jwt.verify(req_auth, TOKEN)
     } catch (e) {
         if (String("err.name") == "JsonWebTokenError") {
-            res.json({ "state": 0, "msg": "鉴权失败" })
+            req.analyz_state    = 0
+            req.analyz_profile  = null
+            next()
             return false
         }
     }
@@ -34,7 +38,9 @@ module.exports = (req, res, next, mongo_model_account, TOKEN) => {
     } catch (e) {
         _id     = ""
         time    = ""
-        res.json({ "state": 0, "msg": "鉴权失败" })
+        req.analyz_state    = 0
+        req.analyz_profile  = null
+        next()
         return false
     }
 
@@ -47,20 +53,23 @@ module.exports = (req, res, next, mongo_model_account, TOKEN) => {
     }).then((v) => {
         
         if (!v) {
-            res.json({ "state": 0, "msg": "鉴权失败" })
+            req.analyz_state    = 0
+            req.analyz_profile  = null
+            next()
+            return false
+        } else {
+            req.analyz_state    = 1
+            req.analyz_profile  = v
+            req.analyz_profile._id = _id
+            next()
             return false
         }
-        
-        req.analyz_state    = 1
-        req.analyz_profile  = v
-        next()
 
     }).catch((err) => {
-
+        console.log("middleware account err =>", err)
         req.analyz_state    = 0
         req.analyz_profile  = null
-        res.json({ "state": 0, "msg": "鉴权失败" })
+        next()
         return false
-
     })
 }

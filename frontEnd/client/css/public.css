@@ -73,11 +73,12 @@ body {
 .answer_btn {
     background-color: var(--gray-btn-bgc);
     color: var(--gray-btn-color);
+    padding: 2px 15px;
 }
 
 .answer_input {
     border: 1px solid var(--answer-input-border-color);
     border-radius: 3px;
     background-color: var(--answer-input-bgc);
-    padding: 7px;
+    padding: 3px;
 }

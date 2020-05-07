@@ -16,6 +16,9 @@ module.exports = (mongoose) => {
         // 上次提交时间戳
         last_submit:    { type: Number, default: 0 },
         // 用户提交任务口令 每次用户密码登录之后刷新
-        var_token:      { type: String }
+        var_token:      { type: String },
+
+        // 提交过的任务及其数据
+        missons:        { type: Object }
     })
 }

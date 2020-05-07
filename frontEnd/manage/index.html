@@ -50,8 +50,10 @@
 
             ajax("POST", "http://localhost:14488/yummy/missionadd", { title, article, answer, score }, { "Authorization": admin_token }).then((res) => {
                 console.log("请求成功 =>", res)
+                alert(res.data.msg)
             }).catch((err) => {
                 console.log("请求失败 =>", err)
+                alert(err)
             })
         }
     </script>

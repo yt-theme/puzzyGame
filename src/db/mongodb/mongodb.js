@@ -63,6 +63,15 @@ class Mongo {
         return new Mongodb_model({ mongoose, schema, collection_name, collection })
     }
 
+    // 用户记录模型
+    Mongo_model_account_record () {
+        const collection_name   = "Account_record"
+        const collection        = "account_record"
+        const schema            = require("./schema/account_record")(mongoose)
+
+        return new Mongodb_model({ mongoose, schema, collection_name, collection })
+    }
+
     // 任务模型
     Mongo_model_mission () {
         const collection_name   = "Mission"
@@ -81,7 +90,8 @@ const mongo_model_admin = mongo.Mongo_model_admin()
 mongo.admin_init(mongo_model_admin)
 
 module.exports = {
-    "Mongo_model_admin":   mongo_model_admin,
-    "Mongo_model_account": mongo.Mongo_model_account(),
-    "Mongo_model_mission": mongo.Mongo_model_mission()
+    "Mongo_model_admin":            mongo_model_admin,
+    "Mongo_model_account":          mongo.Mongo_model_account(),
+    "Mongo_model_account_record":   mongo.Mongo_model_account_record(),
+    "Mongo_model_mission":          mongo.Mongo_model_mission()
 }

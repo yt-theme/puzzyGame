@@ -14,6 +14,8 @@ module.exports = (mongoose) => {
         // 分数表 逗号分隔 分数值与答案表对应: 50,100
         score:      { type: String, require: true },
         // 附加文件 逗号分隔 存储域名之后的路径: upload/aaa.jpg,upload/bbb.jpg
-        files:      { type: String }
+        files:      { type: String },
+        // 过期标志 0未过期 1过期
+        is_overdue: { type: Number, default: 0 }
     })
 }
