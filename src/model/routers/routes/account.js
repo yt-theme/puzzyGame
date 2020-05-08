@@ -105,7 +105,10 @@ class Account {
     checklogin () {
         this.router.post("/yummy/checklogin", (req, res, next) => { middleware_account(req, res, next, Mongo_model_account, this.var_token) }, function (req, res) {
 
-            if (req.analyz_state != 1) return false
+            if (req.analyz_state != 1) {
+                res.json({ "state": 0, "msg": "检查登录失败" })
+                return false
+            }
 
             res.json({ "state": 1, "msg": "ok", "data": req.analyz_profile })
         })

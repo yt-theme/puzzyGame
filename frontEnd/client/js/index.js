@@ -15,6 +15,7 @@ let CURRENT_page = 1
 
 window.onload = function () {
     if (localStorage.getItem("var_token")) {
+        query_today_data()
         check_login()
     } else {
         query_today_data()
@@ -108,6 +109,8 @@ function check_login () {
             set_user_info(res.data.data)
         } else {
             alert(res.data.msg)
+            // 清空本地存储token
+            localStorage.setItem("var_token", "")
         }
     }).catch((err) => {
         console.log("请求失败 =>", err)
