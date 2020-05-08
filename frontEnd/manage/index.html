@@ -29,7 +29,7 @@
         function login () {
             let username = document.getElementById("input_username").value
             let password = document.getElementById("input_password").value
-            ajax("POST", "http://localhost:14488/yummy/adminlogin", { username, password }).then((res) => {
+            ajax("POST", "/yummy/adminlogin", { username, password }).then((res) => {
                 console.log("请求成功 =>", res)
                 if (res.data.state != 1) {
                     alert("登录失败")
@@ -48,7 +48,7 @@
             let answer  = document.getElementById("textarea_answer").value
             let score   = document.getElementById("textarea_score").value
 
-            ajax("POST", "http://localhost:14488/yummy/missionadd", { title, article, answer, score }, { "Authorization": admin_token }).then((res) => {
+            ajax("POST", "/yummy/missionadd", { title, article, answer, score }, { "Authorization": admin_token }).then((res) => {
                 console.log("请求成功 =>", res)
                 alert(res.data.msg)
             }).catch((err) => {

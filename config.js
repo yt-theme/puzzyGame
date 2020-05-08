@@ -10,7 +10,7 @@ const HTTP_PORT = 14488
 
 // 数据库
 // mongodb
-const MONGODB_URL       = "0.0.0.0"
+const MONGODB_URL       = "127.0.0.1"
 const MONGODB_PORT      = 27017
 const MONGODB_DBNAME    = "puzzygame"
 
