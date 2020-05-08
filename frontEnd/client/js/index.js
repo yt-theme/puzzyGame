@@ -149,6 +149,7 @@ function query_today_data () {
         console.log("请求成功 =>", res)
         if (res.data.state == 1) {
             render_article_data(res.data.data, "normal", res.data.record)
+            CURRENT_page = 1
         } else {
             alert(res.data.msg)
         }
