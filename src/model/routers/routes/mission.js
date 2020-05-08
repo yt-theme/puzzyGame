@@ -119,8 +119,12 @@ class Mission {
                 //          用户有没有提交过此任务
                 // #################################################### 
                 let reocrd_dat = null
+
+                console.log("query ======>", v)
                 if (req.analyz_state == 1) {
-                    reocrd_dat = await Mongo_model_account_record.findOne({$and:[{ "account_id": req.analyz_profile._id}, {"mission_id": v[0]._id }]})
+                    reocrd_dat = await Mongo_model_account_record.findOne({
+                        $and:[{ "account_id": (req.analyz_profile&&req.analyz_profile._id) ? req.analyz_profile._id : '' }, {"mission_id": v[0][0]._id }]
+                    })
 
                     console.log("reocrd_dat =>", reocrd_dat)
 

@@ -38,7 +38,7 @@ function timestamp_to_datetime (stamp) {
     let dateobj = new Date(stamp)
     return  dateobj.getFullYear() + "年" +
             (dateobj.getMonth() + 1) + "月" +
-            (dateobj.getDate() + 1) + "日 " +
+            (dateobj.getDate()) + "日 " +
             dateobj.getHours() + ":" +
             dateobj.getMinutes() + ":" +
             dateobj.getSeconds()

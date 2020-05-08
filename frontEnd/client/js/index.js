@@ -178,18 +178,32 @@ function render_article_data (arr, mode, record) {
             <!-- 提交答案区域 -->
             ${
                 record
-                ? `
-                    <div class="submit_answer align_cent">
-                        <label class="margin_r_11px">分数 <span>${record.score || 0}</span></label>
-                        <label class="margin_r_11px">提交时间 <small>${timestamp_to_datetime(record.submit_time)}</small></label>
-                    </div>
-                ` : `
-                    <div class="submit_answer align_cent">
-                        <label class="margin_r_11px">答案</label>
-                        <input class="answer_input margin_r_11px" id="answerinput_${ite._id}"/>
-                        <div class="answer_btn margin_r_11px" onclick="submit_answer('${ite._id}')">提交</div>
-                    </div>
-                `
+                ? 
+                    `
+                        <div class="submit_answer align_cent">
+                            <label class="margin_r_11px">分数 <span>${record.score || 0}</span></label>
+                            <label class="margin_r_11px">提交时间 <small>${timestamp_to_datetime(record.submit_time)}</small></label>
+                        </div>
+                    `
+                : 
+                    // 如果已过期
+                    ite.is_overdue == 1
+                    ?
+                        
+                        `
+                            <div class="submit_answer align_cent">
+                                <label class="margin_r_11px">已过期</label>
+                            </div>
+                        `
+                    :
+
+                        `
+                            <div class="submit_answer align_cent">
+                                <label class="margin_r_11px">答案</label>
+                                <input class="answer_input margin_r_11px" id="answerinput_${ite._id}"/>
+                                <div class="answer_btn margin_r_11px" onclick="submit_answer('${ite._id}')">提交</div>
+                            </div>
+                        `
             }
             
         `
@@ -218,7 +232,7 @@ function query_last () {
                 alert("已是最前一页")
                 return false
             }
-            render_article_data(res.data.data, "preappend")
+            render_article_data(res.data.data, "preappend", res.data.record)
             CURRENT_page += 1
         } else {
             alert(res.data.msg)
