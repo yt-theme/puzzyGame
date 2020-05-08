@@ -121,9 +121,9 @@ class Mission {
                 let reocrd_dat = null
 
                 console.log("query ======>", v)
-                if (req.analyz_state == 1) {
+                if (req.analyz_profile && req.analyz_profile._id && v[0] && v[0][0] && v[0][0]._id) {
                     reocrd_dat = await Mongo_model_account_record.findOne({
-                        $and:[{ "account_id": (req.analyz_profile&&req.analyz_profile._id) ? req.analyz_profile._id : '' }, {"mission_id": v[0][0]._id }]
+                        $and:[{ "account_id": req.analyz_profile._id || "" }, {"mission_id": v[0][0]._id }]
                     })
 
                     console.log("reocrd_dat =>", reocrd_dat)
@@ -133,6 +133,7 @@ class Mission {
 
                 res.json({ "state": 1, "msg": "ok", "data": v[0], "total": v[1], "record": reocrd_dat})
             }).catch((err) => {
+                console.log("mission query 失败 =>", err)
                 res.json({ "state": 0, "msg": "检索失败", "data": err})
             })
         })
@@ -155,7 +156,7 @@ class Mission {
                 if (req.analyz_profile && req.analyz_profile._id) {
                     reocrd_dat = await Mongo_model_account_record.findOne({$and:[{ "account_id": req.analyz_profile._id}, {"mission_id": mission_id }]})
 
-                    console.log("reocrd_dat =>", reocrd_dat)
+                    console.log("reocrd_dat =>", reocrd_dat, req.analyz_profile, mission_id)
 
                 }
 
