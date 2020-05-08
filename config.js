@@ -6,7 +6,7 @@ const ADMIN_USERNAME = "admin"
 const ADMIN_PASSWORD = "admin"
 
 // 端口
-const HTTP_PORT = 14488
+const HTTP_PORT = 80
 
 // 数据库
 // mongodb

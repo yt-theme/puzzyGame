@@ -40,6 +40,10 @@ function timestamp_to_datetime (stamp) {
             (dateobj.getMonth() + 1) + "月" +
             (dateobj.getDate()) + "日 " +
             dateobj.getHours() + ":" +
-            dateobj.getMinutes() + ":" +
-            dateobj.getSeconds()
+            (
+                dateobj.getMinutes()<10 ? ("0" + dateobj.getMinutes()) : dateobj.getMinutes()
+            ) + ":" +
+            (
+                dateobj.getSeconds()<10 ? ("0" + dateobj.getSeconds()) : dateobj.getSeconds()
+            )
 }
