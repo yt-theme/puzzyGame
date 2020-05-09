@@ -29,6 +29,8 @@ class Server {
 
         // 前端目录
         this.app.use("/frontend", this.express.static(cfg.FRONTEND_PATH))
+        // 网站首页目录
+        this.app.use("/", this.express.static(cfg.INDEX_PATH))
         // 上传目录
         this.app.use("/" + cfg.UPLOAD, this.express.static(cfg.UPLOAD_PATH))
 

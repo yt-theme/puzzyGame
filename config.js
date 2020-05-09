@@ -19,6 +19,7 @@ const MONGODB_DBNAME    = "puzzygame"
 const KEY = "key"
 const UPLOAD = "upload"
 const FRONTEND = "frontEnd"
+const INDEX = "frontEnd/client"
 
 // 密钥目录
 const KEY_PATH      = path.join(__dirname, "./" + KEY)
@@ -26,6 +27,8 @@ const KEY_PATH      = path.join(__dirname, "./" + KEY)
 const UPLOAD_PATH   = path.join(__dirname, "./" + UPLOAD)
 // 前端文件目录
 const FRONTEND_PATH = path.join(__dirname, "./" + FRONTEND)
+// 网站首页目录
+const INDEX_PATH    = path.join(__dirname, "./" + INDEX)
 
 // ###############################################
 //                  其它信息
@@ -45,5 +48,6 @@ module.exports = {
     KEY_PATH,
     UPLOAD_PATH,
     FRONTEND_PATH,
+    INDEX_PATH,
     DAY_END_T
 }
