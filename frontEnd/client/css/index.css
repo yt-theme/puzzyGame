@@ -3,7 +3,7 @@
 }
 .container_inner {
     width: 70%;
-    min-width: 175px;
+    min-width: 320px;
     background-color: var(--main-bgc);
 }
 
