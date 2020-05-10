@@ -4,27 +4,54 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>puzzyGame Management</title>
+    <style>
+        .login_area {
+            display: flex;
+        }
+        #input_title {
+            width: 100%;
+        }
+        #input_article {
+            width: 100%;
+            height: 50vh;
+        }
+        #input_answer {
+            width: 100%;
+        }
+        #input_score  {
+            width: 100%;
+        }
+    </style>
 </head>
 <body>
     <div class="container">
         <!-- 登录区域 -->
-        <div>
+        <div class="login_area">
             <label>username<input id="input_username"/></label>
             <label>password<input id="input_password" type="password"/></label>
-            <button onclick="login()">登录</button>
+            <button onclick="login()" style="width: 50px">登录</button>
         </div>
         <!-- 工作区域 -->
         <div>
-            <label>标题<input id="input_title"/></label>
-            <label>正文<textarea id="textarea_article"></textarea></label>
-            <label>答案<textarea id="textarea_answer"></textarea></label>
-            <label>分数<textarea id="textarea_score"></textarea></label>
+            <label>标题<input id="input_title" oninput="store_input('title')"/></label><br/>
+            <label>正文<textarea id="input_article" oninput="store_input('article')"></textarea></label><br/>
+            <label>答案<textarea id="input_answer" oninput="store_input('answer')"></textarea></label><br/>
+            <label>分数<textarea id="input_score" oninput="store_input('score')"></textarea></label><br/>
             <button onclick="submit()">提交</button>
         </div>
     </div>
     <script src="../utils/utils.js"></script>
     <script>
         let admin_token = ""
+
+        window.onload = function () {
+            // 读取存储并贼值
+            document.getElementById("input_title").value    = localStorage.getItem("title")     || ""
+            document.getElementById("input_article").value  = localStorage.getItem("article")   || ""
+            document.getElementById("input_answer").value   = localStorage.getItem("answer")    || ""
+            document.getElementById("input_score").value    = localStorage.getItem("score")     || ""
+        }
+
         // 登录
         function login () {
             let username = document.getElementById("input_username").value
@@ -44,9 +71,9 @@
         // 提交
         function submit () {
             let title   = document.getElementById("input_title").value
-            let article = document.getElementById("textarea_article").value
-            let answer  = document.getElementById("textarea_answer").value
-            let score   = document.getElementById("textarea_score").value
+            let article = document.getElementById("input_article").value
+            let answer  = document.getElementById("input_answer").value
+            let score   = document.getElementById("input_score").value
 
             ajax("POST", "/yummy/missionadd", { title, article, answer, score }, { "Authorization": admin_token }).then((res) => {
                 console.log("请求成功 =>", res)
@@ -55,6 +82,11 @@
                 console.log("请求失败 =>", err)
                 alert(err)
             })
+        }
+
+        // 输入时存储到本地存储
+        function store_input (type) {
+            localStorage.setItem(type, document.getElementById("input_" + type).value)
         }
     </script>
 </body>
