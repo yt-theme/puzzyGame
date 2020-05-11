@@ -12,17 +12,17 @@
 }
 .login_btn {
     position: fixed;
-    top: 5px;
+    top: 0px;
     right: 5px;
 }
 .register_btn {
     position: fixed;
-    top: 5px;
-    right: 76px;
+    top: 0px;
+    right: calc(59px + 1.5em);
 }
 .logout_btn {
     position: fixed;
-    top: 5px;
+    top: 0px;
     right: 5px;
     display: none;
 }
@@ -130,4 +130,12 @@
 .user_score_area_li {
     color: var(--article-color);
     padding: 5px 0;
+}
+.user_score_area_li_label {
+    display: inline-block;
+}
+.user_score_area_li_value {
+    display: inline-block;
+    border-bottom: 1px solid var(--article-color);
+    margin-left: 0.5em;
 }

@@ -8,6 +8,7 @@ let login_inner_title       = document.getElementById("login_inner_title")
 let login_inner_username    = document.getElementById("login_inner_username")
 let login_inner_password    = document.getElementById("login_inner_password")
 let article_content         = document.getElementById("article_content")
+let user_info_username      = document.getElementById("user_sum_username")
 let user_sum_score          = document.getElementById("user_sum_score")
 let user_sum_level          = document.getElementById("user_sum_level")
 
@@ -136,8 +137,9 @@ function get_userinfo () {
 
 // 设置用户基本信息到网页
 function set_user_info(obj) {
-    user_sum_score.innerHTML = obj.score || 0
-    user_sum_level.innerHTML = obj.level || "未开通等级"
+    user_info_username.innerHTML    = obj.username
+    user_sum_score.innerHTML        = obj.score || 0
+    user_sum_level.innerHTML        = obj.level || "未开通等级"
 }
 
 

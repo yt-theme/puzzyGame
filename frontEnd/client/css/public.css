@@ -9,10 +9,10 @@ ul { list-style: none; }
 body {
     --main-bgc: #2E3441;
     --lower-bgc: #424755;
-    --normal-btn-bgc: #D056B3;
-    --normal-btn-color: #f9f9f9;
-    --gray-btn-bgc: #e9e6e7;
-    --gray-btn-color: #4a4a4a;
+    --normal-btn-bgc: rgb(25, 36, 57);
+    --normal-btn-color: #ccd4df;
+    --gray-btn-bgc: #d8d8e6;
+    --gray-btn-color: #39393a;
     --box-shadow-color: #333;
     --pop-bgc: #33333377;
     --login-inner-bgc: #efefef;
@@ -24,7 +24,8 @@ body {
     --last-article-link-color: #fefef1;
     --split-line-color: #c6c5c3;
     --answer-input-border-color: #d3d2d1;
-    --answer-input-bgc: #e9e6e7;
+    --answer-input-box-shadow: rgb(71, 90, 133);
+    --answer-input-bgc: #00000000;
     --scroll-bar-color: #616161;
     --scroll-bar-bgc: #e3e3e3;
 }
@@ -46,7 +47,7 @@ body {
     justify-content: center;
     align-items: center;
     font-size: 18px;
-    border-radius: 3px;
+    border-radius: 2px;
     box-shadow: 0 0 2px var(--box-shadow-color);
     padding: 5px 15px;
     cursor: pointer;
@@ -58,6 +59,22 @@ body {
 .gray_btn {
     background-color: var(--gray-btn-bgc);
     color: var(--gray-btn-color);
+}
+
+.btn_to_top {
+    position: fixed;
+    top: 0;
+    border-radius: 0 0 100% 100%;
+    font-size: 14px;
+    padding: 0;
+    padding-left: 1.4em;
+    padding-right: 1.4em;
+    padding-bottom: 5px;
+    transition: all 0.3s;
+ }
+.btn_to_top:hover {
+    padding-top: 13px;
+    transition: all 0.3s;
 }
 
 .form_input {
@@ -77,8 +94,15 @@ body {
 }
 
 .answer_input {
-    border: 1px solid var(--answer-input-border-color);
-    border-radius: 3px;
+    border: 0;
+    border-bottom: 2px solid var(--answer-input-border-color);
+    
     background-color: var(--answer-input-bgc);
-    padding: 3px;
+    outline: none;
+    color: var(--answer-input-border-color);
+    padding: 3px 1em;
+}
+.answer_input:focus {
+    border-radius: 10000px;
+    box-shadow: 0 5px 50px var(--answer-input-box-shadow);
 }

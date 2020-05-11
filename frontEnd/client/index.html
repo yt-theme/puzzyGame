@@ -23,21 +23,25 @@
     <!-- 周围 -->
     <div class="around">
         <!-- 注册 -->
-        <div class="register_btn normal_btn" id="register_btn" onclick="show_login_pop('register')">注册</div>
+        <div class="register_btn normal_btn btn_to_top" id="register_btn" onclick="show_login_pop('register')">注册</div>
         <!-- 登录按钮 -->
-        <div class="login_btn normal_btn" id="login_btn" onclick="show_login_pop()">登录</div>
+        <div class="login_btn normal_btn btn_to_top" id="login_btn" onclick="show_login_pop()">登录</div>
         <!-- 注销按钮 -->
-        <div class="logout_btn normal_btn" id="logout_btn" onclick="do_logout()">注销</div>
+        <div class="logout_btn normal_btn btn_to_top" id="logout_btn" onclick="do_logout()">注销</div>
         <!-- 用户积分 -->
         <div class="user_score_area">
             <ul class="user_score_area_ul">
                 <li class="user_score_area_li">
-                    <span>总分数</span>
-                    <span id="user_sum_score"></span>
+                    <span class="user_score_area_li_label">用户</span>
+                    <span class="user_score_area_li_value" id="user_sum_username">访客</span>
                 </li>
                 <li class="user_score_area_li">
-                    <span>等级</span>
-                    <span id="user_sum_level"></span>
+                    <span class="user_score_area_li_label">总分</span>
+                    <span class="user_score_area_li_value" id="user_sum_score">0</span>
+                </li>
+                <li class="user_score_area_li">
+                    <span class="user_score_area_li_label">等级</span>
+                    <span class="user_score_area_li_value" id="user_sum_level">0</span>
                 </li>
             </ul>
         </div>
