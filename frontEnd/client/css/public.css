@@ -108,3 +108,12 @@ body {
     border-radius: 10000px;
     box-shadow: 0 5px 50px var(--answer-input-box-shadow);
 }
+
+@media screen and (min-width: 320px) {
+    .container_inner {
+        width: 100vw !important;
+    }
+    .answer_input {
+        width: 143px;
+    }
+}
