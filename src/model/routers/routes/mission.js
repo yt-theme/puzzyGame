@@ -246,10 +246,10 @@ class Mission {
                 -   #
             */
             // 如果已提交过
-            if (req.analyz_profile.last_submit >= last_day_end_t) {
-                res.json({ "state": 0, "msg": "今日已提交过任务, 等下一期吧" })
-                return false
-            }
+            // if (req.analyz_profile.last_submit >= last_day_end_t) {
+            //     res.json({ "state": 0, "msg": "今日已提交过任务, 等下一期吧" })
+            //     return false
+            // }
 
 
             // 用户得分&&等级

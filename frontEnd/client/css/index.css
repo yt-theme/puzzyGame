@@ -118,21 +118,42 @@
     padding: 1em 0;
 }
 
+@keyframes user_score_area_mousehover {
+    from { transform: translateX(-221px); }
+    to { transform: translateX(0px); }
+}
+@keyframes user_score_area_mouseout {
+    from { transform: translateX(-221px); }
+    to { transform: translateX(0px); }
+}
+
 .user_score_area {
     position: fixed;
     top: 5px;
-    left: 5px;
+    left: -221px;
+    width: 230px;
     /* background-color: var(--main-bgc); */
     text-shadow: 0 0 5px var(--main-bgc);
     border-radius: 3px;
-    padding: 0.5em;
+    border-right: 4px solid var(--user-score-area-border-color);
+    border-top: 1px solid var(--user-score-area-border-color);
+    border-bottom: 1px solid var(--user-score-area-border-color);
+    background-color: var(--user-score-area-border-bgc);
+    overflow: hidden;
+    padding: 8px;
+    padding-left: 13px;
+    animation: user_score_area_mouseout 0.5s;
+}
+.user_score_area:hover {
+    left: 0px;
+    animation: user_score_area_mousehover 0.3s;
 }
 .user_score_area_li {
     color: var(--article-color);
     padding: 5px 0;
 }
 .user_score_area_li_label {
-    display: inline-block;
+    display: inline;
 }
 .user_score_area_li_value {
     display: inline-block;

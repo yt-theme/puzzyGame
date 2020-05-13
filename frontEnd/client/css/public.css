@@ -28,6 +28,8 @@ body {
     --answer-input-bgc: #00000000;
     --scroll-bar-color: #616161;
     --scroll-bar-bgc: #e3e3e3;
+    --user-score-area-border-color: #c1c1c1;
+    --user-score-area-border-bgc: #2E3441;
 }
 
 .flex { display: flex; }
