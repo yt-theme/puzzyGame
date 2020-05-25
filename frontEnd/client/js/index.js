@@ -139,7 +139,7 @@ function get_userinfo () {
 function set_user_info(obj) {
     user_info_username.innerHTML    = obj.username
     user_sum_score.innerHTML        = obj.score || 0
-    user_sum_level.innerHTML        = obj.level || "未开通等级"
+    // user_sum_level.innerHTML        = obj.level || "未开通等级"
 }
 
 
